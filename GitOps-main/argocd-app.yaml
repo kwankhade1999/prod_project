@@ -1,0 +1,267 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/adservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cartservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/cartservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: checkoutservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/checkoutservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: currencyservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/currencyservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: emailservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/emailservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frontend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/frontend
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loadgenerator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/loadgenerator
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paymentservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/paymentservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: productcatalogservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/productcatalogservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: recommendationservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/recommendationservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shippingservice
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/shippingservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vectordb
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/vectordb
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/QuntamVector/GitOps.git
+    targetRevision: main
+    path: base/shoppingassistantservice
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
