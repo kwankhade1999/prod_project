@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shoppingassistantservice
+  labels:
+    app: shoppingassistantservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shoppingassistantservice
+  template:
+    metadata:
+      labels:
+        app: shoppingassistantservice
+    spec:
+      terminationGracePeriodSeconds: 5
+      securityContext:
+        fsGroup: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      containers:
+      - name: server
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          privileged: false
+          readOnlyRootFilesystem: false
+        image: manojkrishnappa/shoppingassistantservice:a3a410c702c8584658dfbb2e91272534524c1d2d
+        ports:
+        - name: http
+          containerPort: 8080
+        envFrom:
+        - secretRef:
+            name: shopping-assistant-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+# Create secrets before deploying:
+#
+#   kubectl create secret generic postgres-secret \
+#     --from-literal=password=Manoj7100
+#
+#   kubectl create secret generic shopping-assistant-secrets \
+#     --from-literal=OPENAI_API_KEY=sk-... \
+#     --from-literal=LANGCHAIN_API_KEY=ls-... \
+#     --from-literal=DATABASE_URL="postgresql+psycopg://authuser:Manoj7100@vectordb:5432/shoppingdb" \
+#     --from-literal=COLLECTION_NAME=products

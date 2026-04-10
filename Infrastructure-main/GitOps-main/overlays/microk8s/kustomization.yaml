@@ -1,0 +1,123 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# -------------------------------------------------------
+# Overlay for MicroK8s + ArgoCD
+# -------------------------------------------------------
+
+resources:
+  - ../../base
+
+namespace: default
+
+# Common labels applied to all resources
+labels:
+  - pairs:
+      environment: microk8s
+
+# Image overrides — update tag here when a new image is pushed
+images:
+  - name: manojkrishnappa/adservice
+    newTag: "1"
+  - name: manojkrishnappa/cartservice
+    newTag: "1"
+  - name: manojkrishnappa/checkoutservice
+    newTag: "1"
+  - name: manojkrishnappa/currencyservice
+    newTag: "1"
+  - name: manojkrishnappa/emailservice
+    newTag: "1"
+  - name: manojkrishnappa/frontend
+    newTag: "1"
+  - name: manojkrishnappa/loadgenerator
+    newTag: "1"
+  - name: manojkrishnappa/paymentservice
+    newTag: "1"
+  - name: manojkrishnappa/productcatalogservice
+    newTag: "1"
+  - name: manojkrishnappa/recommendationservice
+    newTag: "1"
+  - name: manojkrishnappa/shippingservice
+    newTag: "1"
+  - name: manojkrishnappa/shoppingassistantservice
+    newTag: "1"
+
+# Replica count suitable for a single-node MicroK8s cluster
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: adservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: cartservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: checkoutservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: currencyservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: emailservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: frontend
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: paymentservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: productcatalogservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: recommendationservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: shippingservice
+      spec:
+        replicas: 1
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: shoppingassistantservice
+      spec:
+        replicas: 1

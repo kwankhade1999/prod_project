@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vectordb
+  labels:
+    app: vectordb
+spec:
+  selector:
+    app: vectordb
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+---
+# Create secret before deploying (reuses the same postgres-secret):
+#   kubectl create secret generic postgres-secret --from-literal=password=<your-password>
+#
+# Create shopping assistant secret:
+#   kubectl create secret generic shopping-assistant-secrets \
+#     --from-literal=OPENAI_API_KEY=sk-... \
+#     --from-literal=LANGCHAIN_API_KEY=ls-... \
+#     --from-literal=DATABASE_URL="postgresql+psycopg://authuser:<password>@vectordb:5432/shoppingdb" \
+#     --from-literal=COLLECTION_NAME=products
