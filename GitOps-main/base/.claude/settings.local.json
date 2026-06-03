@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -r \"kind.*Ingress\\\\|kind.*Gateway\\\\|kind.*Route\" /Users/manojkrishnappa/Microservice/QuntamVectorRepos/GitOps/base --include=*.yaml --include=*.yml)",
+      "Bash(xargs sed:*)"
+    ]
+  }
+}

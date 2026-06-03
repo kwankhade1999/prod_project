@@ -1,0 +1,128 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# -------------------------------------------------------
+# Overlay for AWS EKS
+# Uncomment sections below when deploying to EKS
+# -------------------------------------------------------
+
+resources:
+  - ../../base
+
+# namespace: itkannadigaru          # Uncomment: target namespace on EKS
+
+# Common labels applied to all resources
+labels:
+  - pairs:
+      environment: eks
+
+# Image overrides — update tag here when a new image is pushed
+images:
+  - name: manojkrishnappa/adservice
+    newTag: "1"
+  - name: manojkrishnappa/cartservice
+    newTag: "1"
+  - name: manojkrishnappa/checkoutservice
+    newTag: "1"
+  - name: manojkrishnappa/currencyservice
+    newTag: "1"
+  - name: manojkrishnappa/emailservice
+    newTag: "1"
+  - name: manojkrishnappa/frontend
+    newTag: "1"
+  - name: manojkrishnappa/loadgenerator
+    newTag: "1"
+  - name: manojkrishnappa/paymentservice
+    newTag: "1"
+  - name: manojkrishnappa/productcatalogservice
+    newTag: "1"
+  - name: manojkrishnappa/recommendationservice
+    newTag: "1"
+  - name: manojkrishnappa/shippingservice
+    newTag: "1"
+  - name: manojkrishnappa/shoppingassistantservice
+    newTag: "1"
+
+# -------------------------------------------------------
+# EKS-specific patches — Uncomment when deploying to EKS
+# -------------------------------------------------------
+
+patches: []
+  # Scale up replicas for production on EKS
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: frontend
+  #     spec:
+  #       replicas: 2
+
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: checkoutservice
+  #     spec:
+  #       replicas: 2
+
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: productcatalogservice
+  #     spec:
+  #       replicas: 2
+
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: recommendationservice
+  #     spec:
+  #       replicas: 2
+
+  # -------------------------------------------------------
+  # EKS LoadBalancer annotation patch for frontend-external
+  # Adds AWS NLB annotation to the LoadBalancer service
+  # -------------------------------------------------------
+  # - patch: |-
+  #     apiVersion: v1
+  #     kind: Service
+  #     metadata:
+  #       name: frontend-external
+  #       annotations:
+  #         service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+  #         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+
+  # -------------------------------------------------------
+  # EKS IAM Role for Service Account (IRSA)
+  # Annotate service accounts with EKS IAM role ARNs
+  # -------------------------------------------------------
+  # - patch: |-
+  #     apiVersion: v1
+  #     kind: ServiceAccount
+  #     metadata:
+  #       name: cartservice
+  #       annotations:
+  #         eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT_ID:role/cartservice-role
+
+  # -------------------------------------------------------
+  # Resource limit increases for EKS production workloads
+  # -------------------------------------------------------
+  # - patch: |-
+  #     apiVersion: apps/v1
+  #     kind: Deployment
+  #     metadata:
+  #       name: adservice
+  #     spec:
+  #       template:
+  #         spec:
+  #           containers:
+  #             - name: server
+  #               resources:
+  #                 requests:
+  #                   cpu: 300m
+  #                   memory: 256Mi
+  #                 limits:
+  #                   cpu: 500m
+  #                   memory: 512Mi
