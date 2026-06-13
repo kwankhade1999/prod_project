@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  selector:
+    app: postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP
+---
+# Create secrets before deploying:
+#   kubectl create secret generic postgres-secret --from-literal=password=<your-password> -n <namespace>
+#   kubectl create secret generic authservice-secret --from-literal=jwt-secret=<your-jwt-secret> -n <namespace>
