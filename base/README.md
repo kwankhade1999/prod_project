@@ -1,4 +1,4 @@
-# GitOps Base — Kubernetes Manifests
+# GitOps Base — Kubernetes Manifests 20 june
 
 This directory contains the Kustomize base manifests for the microservices platform.
 External traffic is served over **HTTPS** via NGINX Ingress + cert-manager (Let's Encrypt).
