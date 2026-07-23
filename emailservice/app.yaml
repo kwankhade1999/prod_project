@@ -6,8 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/kwankhade1999/GitOps.git
-    targetRevision: main
+    repoURL: https://github.com/kwankhade1999/prod_project.git
     path: base/emailservice
   destination:
     server: https://kubernetes.default.svc
