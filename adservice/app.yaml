@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/QuntamVector/GitOps.git
+    repoURL: https://github.com/kwankhade1999/GitOps.git
     targetRevision: main
     path: base/adservice
   destination:
